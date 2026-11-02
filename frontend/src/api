@@ -1,0 +1,283 @@
+import axios from 'axios';
+
+/**
+ * API Configuration
+ * Centralized axios instance with base URL, request/response interceptors,
+ * auth token injection, and consistent error handling across the EventHub application.
+ */
+
+const API_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:3000';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 15000,
+});
+
+/**
+ * Request Interceptor - inject auth token from localStorage
+ */
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token') || localStorage.getItem('userId');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+/**
+ * Response Interceptor - handle common errors globally
+ */
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const { response } = error;
+
+    // Handle 401 Unauthorized - redirect to login
+    if (response && response.status === 401) {
+      localStorage.clear();
+      window.location.href = '/login';
+    }
+
+    // Handle 403 Forbidden
+    if (response && response.status === 403) {
+      console.error('Access forbidden. You do not have permission to perform this action.');
+    }
+
+    // Handle 500 Server Error
+    if (response && response.status >= 500) {
+      console.error('Server error. Please try again later.');
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// ============================================================
+// AUTH SERVICE
+// ============================================================
+
+export const authService = {
+  async login(credentials) {
+    const response = await api.post('/login', credentials);
+    return response.data;
+  },
+
+  async register(userData) {
+    const response = await api.post('/register', userData);
+    return response.data;
+  },
+
+  logout() {
+    localStorage.clear();
+  },
+
+  getCurrentUser() {
+    const userId = localStorage.getItem('userId');
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+    const role = localStorage.getItem('role');
+    
+    if (!userId || !username) return null;
+    
+    return { userId, username, email, role };
+  },
+
+  setSession(userData) {
+    if (userData.userId) localStorage.setItem('userId', userData.userId);
+    if (userData.username) localStorage.setItem('username', userData.username);
+    if (userData.email) localStorage.setItem('email', userData.email);
+    if (userData.role) localStorage.setItem('role', userData.role);
+  },
+};
+
+// ============================================================
+// EVENT SERVICE
+// ============================================================
+
+export const eventService = {
+  async getAll() {
+    const response = await api.get('/public/events');
+    return response.data;
+  },
+
+  async getById(eventId) {
+    const response = await api.get(`/public/events/${eventId}`);
+    return response.data;
+  },
+
+  async create(eventData) {
+    const response = await api.post('/admin/add-event', eventData);
+    return response.data;
+  },
+
+  async update(eventId, eventData) {
+    const response = await api.put(`/admin/update-event/${eventId}`, eventData);
+    return response.data;
+  },
+
+  async delete(eventId) {
+    const response = await api.delete(`/admin/delete-event/${eventId}`);
+    return response.data;
+  },
+};
+
+// ============================================================
+// BOOKING SERVICE
+// ============================================================
+
+export const bookingService = {
+  async create(bookingData) {
+    const response = await api.post('/booking/create', bookingData);
+    return response.data;
+  },
+
+  async getUserBookings(userId) {
+    const response = await api.get(`/user/bookings/${userId}`);
+    return response.data;
+  },
+
+  async getById(bookingId) {
+    const response = await api.get(`/booking/${bookingId}`);
+    return response.data;
+  },
+
+  async cancel(bookingId) {
+    const response = await api.post(`/booking/cancel/${bookingId}`);
+    return response.data;
+  },
+
+  async requestRefund(bookingId, reason) {
+    const response = await api.post('/refunds/request', { bookingId, reason });
+    return response.data;
+  },
+};
+};
+
+export const paymentService = {
+  async initialize(paymentData) {
+    const response = await api.post('/api/payment/chapa/initialize', paymentData);
+    return response.data;
+  },
+
+  async verify(txRef) {
+    const response = await api.get(`/api/payment/chapa/verify/${txRef}`);
+    return response.data;
+  },
+
+  async getTransaction(txRef) {
+    const response = await api.get(`/api/payment/chapa/transaction/${txRef}`);
+    return response.data;
+  },
+
+  async simulate(simData) {
+    const response = await api.post('/api/payment/chapa/simulate-pay', simData);
+    return response.data;
+  },
+
+  async getConfig() {
+    const response = await api.get('/api/payment/config');
+    return response.data;
+  },
+};
+
+// ============================================================
+// ADMIN SERVICE
+// ============================================================
+
+export const adminService = {
+  async getOverviewMetrics() {
+    const response = await api.get('/admin/overview');
+    return response.data;
+  },
+
+  async getUsers() {
+    const response = await api.get('/admin/users');
+    return response.data;
+  },
+
+  async addUser(userData) {
+    const response = await api.post('/admin/add-user', userData);
+    return response.data;
+  },
+
+  async updateUser(userId, field, value) {
+    const response = await api.put(`/admin/update-user/${userId}`, { [field]: value });
+    return response.data;
+  },
+
+  async deleteUser(userId) {
+    const response = await api.delete(`/admin/delete-user/${userId}`);
+    return response.data;
+  },
+
+  async getUserBookings(userId) {
+    const response = await api.get(`/admin/users/${userId}/bookings`);
+    return response.data;
+  },
+
+  async getEvents() {
+    const response = await api.get('/admin/events');
+    return response.data;
+  },
+
+  async addEvent(eventData) {
+    const response = await api.post('/admin/add-event', eventData);
+    return response.data;
+  },
+
+  async updateEvent(eventId, eventData) {
+    const response = await api.put(`/admin/update-event/${eventId}`, eventData);
+    return response.data;
+  },
+
+  async deleteEvent(eventId) {
+    const response = await api.delete(`/admin/delete-event/${eventId}`);
+    return response.data;
+  },
+
+  async getTickets() {
+    const response = await api.get('/admin/tickets');
+    return response.data;
+  },
+
+  async updateTicketStatus(ticketId, status) {
+    const response = await api.put(`/admin/update-ticket-status/${ticketId}`, { status });
+    return response.data;
+  },
+
+  async getPayments() {
+    const response = await api.get('/admin/payments');
+    return response.data;
+  },
+
+  async getRefunds() {
+    const response = await api.get('/admin/refunds');
+    return response.data;
+  },
+
+  async processRefund(refundId, action) {
+    const response = await api.post(`/admin/refunds/${refundId}/${action}`);
+    return response.data;
+  },
+
+  async getReports() {
+    const response = await api.get('/admin/reports');
+    return response.data;
+  },
+
+  async approveOrganizer(organizerId, action) {
+    const response = await api.post(`/admin/organizers/${organizerId}/${action}`);
+    return response.data;
+  },
+};
+};

@@ -1,0 +1,126 @@
+/* Global Design Tokens & Typography System - Vibrant Warm Gold & Cream Palette ("ደመቅ ያለ" Color System) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap');
+
+:root {
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  
+  /* Vibrant & Rich Color System ("ደመቅ ያለ") */
+  --clr-primary: #ea580c;
+  --clr-primary-hover: #c2410c;
+  --clr-primary-light: #ffedd5;
+  --clr-secondary: #e11d48;
+  --clr-accent: #10b981;
+  --clr-vivid-purple: #9333ea;
+  --clr-vivid-pink: #ec4899;
+  --clr-vivid-gold: #f59e0b;
+  --clr-warning: #f59e0b;
+  --clr-danger: #ef4444;
+  
+  --clr-bg-dark: #fde68a;       /* Rich warm golden cream accent */
+  --clr-bg-light: #fffbeb;      /* Vibrant warm light cream background */
+  --clr-surface: #ffffff;       /* Pure surface card */
+  --clr-surface-muted: #fef3c7; /* Vibrant soft golden cream */
+  --clr-text-main: #1c1917;     /* High contrast deep mocha text */
+  --clr-text-muted: #78350f;    /* Warm rich brown muted text */
+  --clr-border: #fde68a;       /* Vivid warm cream border */
+
+  /* Vibrant Glow Shadows */
+  --shadow-sm: 0 4px 12px rgba(234, 88, 12, 0.08);
+  --shadow-md: 0 10px 30px -5px rgba(234, 88, 12, 0.18);
+  --shadow-lg: 0 20px 40px -10px rgba(234, 88, 12, 0.28);
+  --shadow-glow: 0 0 30px rgba(245, 158, 11, 0.45);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+}
+
+/* Cream Day Mode ("ደመቅ ያለ Day") */
+[data-theme="day"] {
+  --clr-primary: #ea580c;
+  --clr-primary-hover: #c2410c;
+  --clr-primary-light: #ffedd5;
+  --clr-bg-dark: #fde68a;
+  --clr-bg-light: #fffbeb;
+  --clr-surface: #ffffff;
+  --clr-surface-muted: #fef3c7;
+  --clr-text-main: #1c1917;
+  --clr-text-muted: #78350f;
+  --clr-border: #fde68a;
+}
+
+/* Cream Sunset Night Mode ("ደመቅ ያለ Night") */
+[data-theme="night"] {
+  --clr-primary: #f59e0b;
+  --clr-primary-hover: #d97706;
+  --clr-primary-light: #451a03;
+  --clr-bg-dark: #291e14;
+  --clr-bg-light: #322419;
+  --clr-surface: #423022;
+  --clr-surface-muted: #543d2c;
+  --clr-text-main: #fff7ed;
+  --clr-text-muted: #fed7aa;
+  --clr-border: #78350f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-primary);
+  background-color: var(--clr-bg-light);
+  color: var(--clr-text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--clr-bg-light);
+  color: var(--clr-text-main);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-primary);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-primary-hover);
+}
+
+/* Utility Animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-pop-in {
+  animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}

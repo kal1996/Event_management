@@ -1,0 +1,135 @@
+/* Register.css - Premium Account Creation Styling - Cream Palette */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
+
+.register-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fcf9f2 0%, #f4eee3 50%, #ebdcd0 100%);
+    padding: 2rem 1.5rem;
+    font-family: var(--font-primary, 'Inter', system-ui, sans-serif);
+    transition: background 0.3s ease;
+}
+
+.register-box {
+    background: var(--clr-surface, #fffdf8);
+    width: 100%;
+    max-width: 440px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(36, 30, 27, 0.25);
+    border: 1px solid var(--clr-border, #e5dcd0);
+}
+
+.register-box h2 {
+    margin: 0;
+    color: var(--clr-text-main, #2d2623);
+    text-align: center;
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--clr-text-muted, #786c65);
+    margin-bottom: 2rem;
+    font-size: 0.92rem;
+}
+
+.input-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--clr-text-muted, #786c65);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input-group input {
+    padding: 12px 16px;
+    border: 1px solid var(--clr-border, #e5dcd0);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background: var(--clr-bg-light, #fcf9f2);
+    color: var(--clr-text-main, #2d2623);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--clr-primary, #d97706);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    background: var(--clr-surface, #fffdf8);
+}
+
+.error-input {
+    border-color: #ef4444 !important;
+    background: #fef2f2 !important;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #ea580c 0%, #d97706 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
+    transition: all 0.25s ease;
+    margin-top: 1rem;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 25px rgba(234, 88, 12, 0.55);
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 1.75rem;
+    font-size: 0.9rem;
+    color: var(--clr-text-muted, #786c65);
+}
+
+.footer-text a {
+    color: var(--clr-primary, #d97706);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .register-wrapper {
+        padding: 1rem;
+    }
+
+    .register-box {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .register-box h2 {
+        font-size: 1.8rem;
+    }
+}

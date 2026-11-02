@@ -1,0 +1,501 @@
+.payment-verify-page {
+    min-height: 100vh;
+    background-color: var(--bg-primary, #0f172a);
+    color: var(--text-primary, #f8fafc);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.verify-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: var(--bg-card, rgba(30, 41, 59, 0.7));
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.verify-nav .nav-logo {
+    font-size: 24px;
+    font-weight: 800;
+    cursor: pointer;
+    color: var(--text-primary, #ffffff);
+}
+
+.verify-nav .nav-logo span {
+    color: #10b981;
+}
+
+.verify-nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-portal {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-portal:hover {
+    background: #10b981;
+    color: #ffffff;
+}
+
+.verify-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.verify-card {
+    background: var(--bg-card, #1e293b);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    border-radius: 20px;
+    max-width: 620px;
+    width: 100%;
+    padding: 36px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Verifying Loading State */
+.chapa-brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.verify-spinner {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 28px;
+}
+
+.spinner-ring {
+    width: 64px;
+    height: 64px;
+    border: 4px solid rgba(16, 185, 129, 0.2);
+    border-top: 4px solid #10b981;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.verify-card h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.verify-sub {
+    color: var(--text-secondary, #94a3b8);
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.ref-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.ref-tag code {
+    color: #38bdf8;
+    font-weight: 600;
+}
+
+.security-notice {
+    display: block;
+    color: var(--text-muted, #64748b);
+    font-size: 12px;
+    margin-top: 14px;
+}
+
+/* Success State */
+.success-icon-badge {
+    width: 68px;
+    height: 68px;
+    background: #10b981;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+}
+
+.gateway-stamp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px dashed rgba(16, 185, 129, 0.3);
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin: 20px 0;
+}
+
+.stamp-logo {
+    color: #10b981;
+    font-weight: 700;
+}
+
+.stamp-meta {
+    color: var(--text-secondary, #94a3b8);
+}
+
+/* Digital Pass Mockup */
+.digital-ticket-pass {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: left;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.pass-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.pass-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary, #94a3b8);
+}
+
+.pass-code {
+    font-size: 22px;
+    color: #38bdf8;
+    margin: 4px 0 0;
+    font-family: monospace;
+    font-weight: 700;
+}
+
+.pass-status-pill {
+    background: #10b981;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.pass-event-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.pass-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.pass-meta-grid small {
+    display: block;
+    font-size: 11px;
+    color: var(--text-secondary, #94a3b8);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.pass-meta-grid strong {
+    font-size: 14px;
+    color: #f1f5f9;
+}
+
+.tier-badge-val {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.amount-highlight {
+    color: #10b981 !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+/* QR Code Section */
+.pass-qr-section {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.qr-box {
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.qr-matrix-mockup {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    background: #000;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border: 3px solid #000000;
+}
+
+.qr-corner.top-left { top: 3px; left: 3px; }
+.qr-corner.top-right { top: 3px; right: 3px; }
+.qr-corner.bottom-left { bottom: 3px; left: 3px; }
+
+.qr-center-icon {
+    background: #10b981;
+    color: white;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 2px 4px;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.qr-meta small {
+    display: block;
+    color: #10b981;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+}
+
+.qr-meta span {
+    font-size: 12px;
+    color: var(--text-secondary, #94a3b8);
+}
+
+/* Receipt Breakdown */
+.receipt-breakdown {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.receipt-breakdown h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text-secondary, #94a3b8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--text-secondary, #cbd5e1);
+}
+
+.receipt-row code {
+    color: #38bdf8;
+}
+
+.receipt-row.total-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.total-amount-glow {
+    color: #10b981;
+    font-size: 18px;
+}
+
+/* Actions */
+.verify-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-print-receipt {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-print-receipt:hover {
+    background: #334155;
+}
+
+.btn-goto-portal {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-goto-portal:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.btn-return-home {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-secondary, #94a3b8);
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-return-home:hover {
+    color: white;
+    border-color: white;
+}
+
+/* Failed State */
+.failed-icon-badge {
+    width: 68px;
+    height: 68px;
+    background: #ef4444;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+}
+
+.failed-reasons-box {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #fca5a5;
+}
+
+.failed-reasons-box ul {
+    margin: 8px 0 0 18px;
+    padding: 0;
+}
+
+.btn-retry-payment {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-retry-payment:hover {
+    background: #dc2626;
+}
+
+/* Print Styles */
+@media print {
+    .verify-nav, .verify-actions, .verify-sub, .gateway-stamp {
+        display: none !important;
+    }
+    .payment-verify-page {
+        background: white !important;
+        color: black !important;
+    }
+    .verify-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    .digital-ticket-pass {
+        background: white !important;
+        color: black !important;
+        border: 2px solid black !important;
+    }
+    .pass-event-title, .pass-meta-grid strong, .receipt-row {
+        color: black !important;
+    }
+}

@@ -1,0 +1,40 @@
+/* App.css - Universal Mobile Responsiveness Helpers & Touch Safety */
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  max-width: 100%;
+}
+
+/* Global scroll container helper for mobile tables */
+.table-container, .table-responsive, table {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch-friendly target sizing on mobile viewports */
+@media (max-width: 768px) {
+  button, 
+  .btn-signup, 
+  .btn-login, 
+  .btn-book, 
+  .search-btn, 
+  .tab-btn, 
+  .btn-nav-login, 
+  .btn-nav-dashboard,
+  .btn-logout {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Prevent horizontal scrolling glitches on mobile */
+  body, #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
